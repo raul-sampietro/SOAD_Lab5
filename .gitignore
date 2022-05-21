@@ -53,5 +53,4 @@ dkms.conf
 
 program
 
-Cfile*.txt
-file*.txt
+*.txt

@@ -56,7 +56,9 @@ int main (int argc, char *argv[]) {
             execlp("vim", "vim", y, "-xs", "vim.inp",  (char *) 0);
         }
 
-        while(waitpid(pid, NULL, 0) > 0);
+        
+        while(waitpid(-1, NULL, 0) > 0);
+        sleep(1);
     }
 
     // Obtención e interpretación de resultados
@@ -89,6 +91,7 @@ int main (int argc, char *argv[]) {
     double avg_relation = relation_sum / n;
 
     printf("With %d encrypted and regular files created, encrypted files are an average of %f times larger\n", n, avg_relation);
+    exit(0);
 
 }
 
