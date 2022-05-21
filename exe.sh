@@ -9,5 +9,5 @@ if [ $# != 1 ]; then
 else
     make clean
     make
-    program $1
+    encryption_test $1
 fi

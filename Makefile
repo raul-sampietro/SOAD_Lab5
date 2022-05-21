@@ -1,8 +1,8 @@
-all: program
+all: encryption_test
 
-program: program.c
-	gcc -o program program.c
+encryption_test: encryption_test.c
+	gcc -o encryption_test encryption_test.c
 
 clean:
 	rm -f *.txt
-	rm -f program
+	rm -f encryption_test
