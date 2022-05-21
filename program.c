@@ -51,8 +51,8 @@ int main (int argc, char *argv[]) {
             
             // El programa muta y crea un fichero cifrado a partir del fichero que se acaba de crear
             char y[128];
-            sprintf(y, "vim Cfile%d.txt" , i);
-            execlp(y, "-xs input_file.txt",  (char *) 0);
+            sprintf(y, "Cfile%d.txt" , i);
+            execlp("vim", "vim", y, "-xs", "input_file.txt",  (char *) 0);
         }
 
         while(waitpid(pid, NULL, 0) > 0);
