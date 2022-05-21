@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <time.h>
+#include <sys/stat.h>
 
 
 void usage() {
@@ -22,6 +22,7 @@ int main (int argc, char *argv[]) {
     int n = atoi(argv[1]);
 
 
+    // Creación de ficheros encriptados y no encriptados
     for (int i = 0; i < n; ++i) {
         int pid = fork();
         if (pid == 0) { // padre
@@ -29,7 +30,7 @@ int main (int argc, char *argv[]) {
         }
         else { // hijo
 
-            // Crea un fichero sin cifrar y escribe una linia, luego escribe i linias
+            // Crea un fichero sin cifrar y escribe una linea, luego escribe i linias
             // Hace una copia de este fichero que sera el que se cifra
             FILE *fpr;
             FILE *fprC;
@@ -52,10 +53,42 @@ int main (int argc, char *argv[]) {
             // El programa muta y crea un fichero cifrado a partir del fichero que se acaba de crear
             char y[128];
             sprintf(y, "Cfile%d.txt" , i);
-            execlp("vim", "vim", y, "-xs", "input_file.txt",  (char *) 0);
+            execlp("vim", "vim", y, "-xs", "vim.inp",  (char *) 0);
         }
 
         while(waitpid(pid, NULL, 0) > 0);
     }
+
+    // Obtención e interpretación de resultados
+    struct stat sb;
+    double relation_sum = 0;
+
+    for (int i = 0; i < n; ++i) {
+        char x[128];
+        char z[128];
+        sprintf(x, "file%d.txt", i);
+        sprintf(z, "Cfile%d.txt", i);
+        
+        if (stat(x, &sb) == -1) {
+            perror("stat");
+            exit(1);
+        }
+        
+        double size_unencrypted = sb.st_size;
+
+        if (stat(z, &sb) == -1) {
+            perror("stat");
+            exit(1);
+        }
+        
+        double size_encrypted = sb.st_size;
+
+        relation_sum += size_encrypted / size_unencrypted;
+    }
+
+    double avg_relation = relation_sum / n;
+
+    printf("With %d encrypted and regular files created, encrypted files are an average of %f times larger\n", n, avg_relation);
+
 }
 
