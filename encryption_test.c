@@ -56,7 +56,6 @@ int main (int argc, char *argv[]) {
             execlp("vim", "vim", y, "-xs", "vim.inp",  (char *) 0);
         }
 
-        
         while(waitpid(-1, NULL, 0) > 0);
         sleep(1);
     }
