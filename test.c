@@ -7,41 +7,47 @@
 #include <time.h>
 
 void usage() {
-    printf("Usage: program.c nFiles\n");
-    printf("Please introduce the number of files to be generated\n");
+    printf("Usage: program.c nFiles nLines\n");
+    printf("Please introduce the number of files to be generated and the number of lines to be written in each file\n");
 }
 
 int main (int argc, char *argv[]) {
-  
-    if(argc <= 1) {
+    printf("hola\n");
+    if(argc <= 2) {
         usage();
         exit(1);
     }
-
+    printf("hola\n");
     int n = atoi(argv[1]);
-
+    int l = atoi(argv[2]);
+    printf("hola\n");
     clock_t begin = clock();
 
     // Creación de ficheros encriptados y no encriptados
     for (int i = 0; i < n; ++i) {
-        // Crea un fichero sin cifrar y escribe una linea, luego escribe i linias
-        // Hace una copia de este fichero que sera el que se cifra
+        printf("ini\n");
+        // Crea un fichero sin cifrar y escribe una linea, luego escribe l linias
         FILE *fpr;
-        char x[128];
-        sprintf(x, "out/file%d.txt", i);
+        char *x;
+        printf("hola\n");
+        sprintf(x, "./out/file%d.txt", i);
         fpr = fopen(x, "w+");
-        fprintf(fpr, "El contenido del fichero numero %d es:\n", i);
-        for (int j = 0; j < i; ++j) {
-            fprintf(fpr, "Esto es un contenido aleatorio\n");
+        printf("hola\n");
+        for (int j = 0; j < l; ++j) {
+            fprintf(fpr, "ihbfiasbvizvfjhznvlibxvkjxnlvjdbjdhbvjbvjdhbdvjhdjhvbd\n");
         }
+        printf("hola\n");
         fclose(fpr);
+        printf("fin\n");
     }
-
+    printf("hola\n");
     clock_t end = clock();
 
     FILE *fpr = fopen("results.txt", "a");
     FILE *fp = fopen("raw.txt", "a");
     fprintf(fpr, "Test for %d files: %ld miliseconds\n", n, end);
     fprintf(fp, "%d %ld\n", n, end);
+    fclose(fpr);
+    fclose(fp);
 }
 

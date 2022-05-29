@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/samragu/Documents/SOAD/Laboratorios/LAB-5/SOAD_Lab5'
+gcc -o test test.c
+make: Leaving directory '/home/samragu/Documents/SOAD/Laboratorios/LAB-5/SOAD_Lab5'
+ 
