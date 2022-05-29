@@ -41,7 +41,9 @@ int main (int argc, char *argv[]) {
 
     clock_t end = clock();
 
-    printf("%ld\n", end);
-
+    FILE *fpr = fopen("results.txt", "a");
+    FILE *fp = fopen("raw.txt", "a");
+    fprintf(fpr, "Test for %d files: %ld miliseconds\n", n, end);
+    fprintf(fp, "%d %ld\n", n, end);
 }
 
