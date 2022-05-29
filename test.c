@@ -6,12 +6,10 @@
 #include <sys/stat.h>
 #include <time.h>
 
-
 void usage() {
     printf("Usage: program.c nFiles\n");
     printf("Please introduce the number of files to be generated\n");
 }
-
 
 int main (int argc, char *argv[]) {
   
